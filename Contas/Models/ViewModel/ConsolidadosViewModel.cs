@@ -10,17 +10,22 @@ namespace Contas.Models.ViewModel {
         public string Itau { get; set; }
         public string Inter { get; set; }
         public string Savings { get; set; }
-        private List<Cartao> cartoes;
-        public List<Cartao> Cartoes {
+        private List<CartaoConsolidado> cartoes;
+        public List<CartaoConsolidado> Cartoes {
             get {
                 if (cartoes == null) {
-                    cartoes = new List<Cartao>();
+                    cartoes = new List<CartaoConsolidado>();
                 }
                 return cartoes;
             }
             set {
                 cartoes = value;
             }
+        }
+        public class CartaoConsolidado {
+            public string Nome;
+            public decimal CreditoAtual;
+            public decimal CreditoTotal;
         }
     }
 }

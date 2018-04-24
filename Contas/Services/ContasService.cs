@@ -14,5 +14,15 @@ namespace Contas.Services {
                 .Where(m => m.Data.Value.Month == data.Month && m.Data.Value.Year == data.Year && m.Tipo == "gasto")
                 .ToList();
         }
+
+        public static decimal GetSaveMes(DateTime mes) {
+            MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
+            var busca = movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Tipo == "save" && m.Data.Value.Month == mes.Month).FirstOrDefault();
+            decimal save = 0;
+            if (busca != null) {
+                save = busca.Valor;
+            }
+            return save;
+        }
     }
 }

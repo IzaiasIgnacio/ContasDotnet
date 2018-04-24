@@ -8,7 +8,7 @@
         <li><span class="valores_topo"><i class="fas fa-dollar-sign fa-lg"></i> R$ @Model.Savings</span></li>
         <li class="divisor">&nbsp;</li>
         @foreach (var cartao in Model.Cartoes) {
-            <li><span class="valores_topo">@cartao.Nome - R$ @cartao.Credito </span></li>
+            <li><span class="valores_topo">@cartao.Nome - R$ @cartao.CreditoAtual / @cartao.CreditoTotal </span></li>
         }
     </ul>
 </div>

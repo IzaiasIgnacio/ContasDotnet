@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Contas.Models.Entity;
+using static Contas.Models.ViewModel.ConsolidadosViewModel;
 
 namespace Contas.ViewComponents {
     public class ConsolidadosViewComponent : ViewComponent {
@@ -15,7 +17,10 @@ namespace Contas.ViewComponents {
             model.Itau = Double.Parse(ConsolidadoService.GetValue("itau"), CultureInfo.InvariantCulture).ToString("F");
             model.Inter = Double.Parse(ConsolidadoService.GetValue("inter"), CultureInfo.InvariantCulture).ToString("F");
             model.Savings = Double.Parse(ConsolidadoService.GetValue("savings"), CultureInfo.InvariantCulture).ToString("F");
-            model.Cartoes = ConsolidadoService.GetCartoes();
+            List<Cartao> cartoes = ConsolidadoService.GetCartoes();
+            foreach (var cartao in cartoes) {
+                model.Cartoes.Add(new CartaoConsolidado {Nome = cartao.Nome, CreditoAtual = cartao.Credito - ConsolidadoService.GetGastosCartao(cartao.Id), CreditoTotal = cartao.Credito});
+            }
             return View("Consolidados", model);
         }
     }
