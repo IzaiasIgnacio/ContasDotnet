@@ -1,0 +1,41 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 15px;
+}
+
+.body-content, .menu_container {
+    width: 90%;
+}
+
+.table tfoot td {
+    font-weight: bold;
+}
+
+.table-condensed td, .table-condensed tfoot td, .table-condensed thead th {
+    padding-left: 2px !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.valores_topo {
+    display: block;
+    padding-top: 15px;
+    margin-left: 10px;
+    color: #9d9d9d;
+}
+
+.navbar-brand {
+    margin-right: 20px;
+}
+
+.divisor {
+    margin-left: 55px;
+}

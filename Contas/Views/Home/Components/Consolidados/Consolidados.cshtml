@@ -1,0 +1,14 @@
+﻿@model Contas.Models.ViewModel.ConsolidadosViewModel
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li><span class="valores_topo"><img src="~/images/casa.png" /> R$ @Model.Casa</span></li>
+        <li><span class="valores_topo"><img src="~/images/itau.png" /> R$ @Model.Itau</span></li>
+        <li><span class="valores_topo"><img src="~/images/inter.png" /> R$ @Model.Inter</span></li>
+        <li class="divisor">&nbsp;</li>
+        <li><span class="valores_topo"><i class="fas fa-dollar-sign fa-lg"></i> R$ @Model.Savings</span></li>
+        <li class="divisor">&nbsp;</li>
+        @foreach (var cartao in Model.Cartoes) {
+            <li><span class="valores_topo">@cartao.Nome - R$ @cartao.Credito </span></li>
+        }
+    </ul>
+</div>

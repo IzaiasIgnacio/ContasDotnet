@@ -1,0 +1,19 @@
+﻿@model Contas.Models.ViewModel.TabelaSavingsViewModel
+<table class="table table-condensed table-bordered">
+    <thead>
+        <tr>
+            <th>@Model.Mes</th>
+            <th class="text-right">@Model.ValorMes</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Save</td>
+            <td class="text-right">@Model.save</td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td class="text-right">@Model.Sobra</td>
+        </tr>
+    </tbody>
+</table>

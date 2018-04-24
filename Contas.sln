@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contas", "Contas\Contas.csproj", "{131DB2F7-5C1E-4498-A083-CDC0F3941370}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{131DB2F7-5C1E-4498-A083-CDC0F3941370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{131DB2F7-5C1E-4498-A083-CDC0F3941370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{131DB2F7-5C1E-4498-A083-CDC0F3941370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{131DB2F7-5C1E-4498-A083-CDC0F3941370}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A42F5EC0-B037-4D3B-A61F-C2FA613D8D5D}
+	EndGlobalSection
+EndGlobal
