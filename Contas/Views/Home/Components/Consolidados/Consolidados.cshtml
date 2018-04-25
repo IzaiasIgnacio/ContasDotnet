@@ -5,10 +5,10 @@
         <li><span class="valores_topo"><img src="~/images/itau.png" /> R$ @Model.Itau</span></li>
         <li><span class="valores_topo"><img src="~/images/inter.png" /> R$ @Model.Inter</span></li>
         <li class="divisor">&nbsp;</li>
-        <li><span class="valores_topo"><i class="fas fa-dollar-sign fa-lg"></i> R$ @Model.Savings</span></li>
+        <li><span class="valores_topo"><img src="~/images/safe.png" /> R$ @Model.Savings</span></li>
         <li class="divisor">&nbsp;</li>
         @foreach (var cartao in Model.Cartoes) {
-            <li><span class="valores_topo">@cartao.Nome - R$ @cartao.CreditoAtual / @cartao.CreditoTotal </span></li>
+            <li><span class="valores_topo"><img src="~/images/@(cartao.Nome).png" /> R$ @cartao.CreditoAtual / @cartao.CreditoTotal </span></li>
         }
     </ul>
 </div>
