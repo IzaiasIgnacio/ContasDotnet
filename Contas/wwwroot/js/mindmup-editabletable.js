@@ -1,4 +1,5 @@
 /*global $, window*/
+var id_modificado;
 $.fn.editableTableWidget = function (options) {
 	'use strict';
 	return $(this).each(function () {
@@ -14,7 +15,8 @@ $.fn.editableTableWidget = function (options) {
 			active,
 			showEditor = function (select) {
 				active = element.find('tbody td:focus');
-				if (active.length) {
+                if (active.length) {
+                    id_modificado = active.closest("tr").find(".id_movimentacao").val();
 					editor.val(active.text())
 						.removeClass('error')
 						.show()

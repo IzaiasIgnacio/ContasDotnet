@@ -11,7 +11,10 @@
             if (@Model.movimentacoes.ElementAtOrDefault(i) != null) {
                 <tr>
                     <td>@Model.movimentacoes[i].Nome</td>
-                    <td class="text-right">@Model.movimentacoes[i].Valor</td>
+                    <td class="text-right">
+                        <input type="hidden" class="id_movimentacao" value="@Model.movimentacoes[i].Id" />
+                        @Model.movimentacoes[i].Valor
+                    </td>
                 </tr>
             }
             else {
@@ -29,11 +32,11 @@
         </tr>
         <tr>
             <td>Total</td>
-            <td class="text-right">@Model.ValorTotal</td>
+            <td class="text-right"><span class="valor_total">@Model.ValorTotal</span></td>
         </tr>
         <tr>
             <td>Sobra</td>
-            <td class="text-right">@Model.Sobra</td>
+            <td class="text-right"><span class="valor_sobra">@Model.Sobra</span></td>
         </tr>
     </tfoot>
 </table>
