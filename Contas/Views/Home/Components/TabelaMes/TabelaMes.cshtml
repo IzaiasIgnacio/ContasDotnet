@@ -11,10 +11,7 @@
             if (@Model.Movimentacoes.ElementAtOrDefault(i) != null) {
                 <tr>
                     <td>@Model.Movimentacoes[i].Nome</td>
-                    <td class="text-right">
-                        <input type="hidden" class="id_movimentacao" value="@Model.Movimentacoes[i].Id" />
-                        @Model.Movimentacoes[i].Valor
-                    </td>
+                    <td class="text-right td_valor"><input type="hidden" class="id_movimentacao" value="@Model.Movimentacoes[i].Id" />@Model.Movimentacoes[i].Valor</td>
                 </tr>
             }
             else {

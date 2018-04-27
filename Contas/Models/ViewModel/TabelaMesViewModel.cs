@@ -22,6 +22,8 @@ namespace Contas.Models.ViewModel {
             Linhas = linhas;
             Indice = indice;
             Save = save.ToString("F");
+            Double valor_mensal;
+            Double sobra_atual;
             switch (indice) {
                 case 0:
                     salario = 0;
@@ -30,16 +32,16 @@ namespace Contas.Models.ViewModel {
                 case 1:
                     salario = Double.Parse(ConsolidadoService.GetValue("salario"), CultureInfo.InvariantCulture);
                     somar = ContasService.Sobra;
-                    var t = Double.Parse(ConsolidadoService.GetValue("mensal"), CultureInfo.InvariantCulture) / 4;
-                    var a = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
-                    Folga = (a - t).ToString("F");
+                    valor_mensal = Double.Parse(ConsolidadoService.GetValue("mensal"), CultureInfo.InvariantCulture) / 4;
+                    sobra_atual = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
+                    Folga = (sobra_atual - valor_mensal).ToString("F");
                 break;
                 default:
                     salario = Double.Parse(ConsolidadoService.GetValue("salario"), CultureInfo.InvariantCulture);
                     somar = ContasService.Sobra;
-                    var ta = Double.Parse(ConsolidadoService.GetValue("mensal"), CultureInfo.InvariantCulture)*indice;
-                    var aa = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
-                    Folga = (aa - ta).ToString("F");
+                    valor_mensal = Double.Parse(ConsolidadoService.GetValue("mensal"), CultureInfo.InvariantCulture)*indice;
+                    sobra_atual = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
+                    Folga = (sobra_atual - valor_mensal).ToString("F");
                 break;
             }
         }
