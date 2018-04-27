@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace Contas.Models.ViewModel {
     public class TabelaSavingsViewModel {
-        public string save;
+        public string Save;
         private DateTime data { get; set; }
         private double somar;
 
         public TabelaSavingsViewModel(DateTime data, int indice, decimal save) {
-            this.save = save.ToString("F");
+            this.Save = save.ToString("F");
             this.data = data;
             if (indice == 0) {
                 somar = Double.Parse(ConsolidadoService.GetValue("savings"), CultureInfo.InvariantCulture);
@@ -30,7 +30,7 @@ namespace Contas.Models.ViewModel {
 
         public string Sobra {
             get {
-                ContasService.Sobra = somar + Double.Parse(save);
+                ContasService.Sobra = somar + Double.Parse(Save);
                 return ContasService.Sobra.ToString("F");
             }
         }

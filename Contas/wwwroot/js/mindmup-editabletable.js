@@ -14,7 +14,7 @@ $.fn.editableTableWidget = function (options) {
 			editor = activeOptions.editor.css('position', 'absolute').hide().appendTo(element.parent()),
 			active,
 			showEditor = function (select) {
-				active = element.find('tbody td:focus');
+				active = element.find('tbody td:focus, .save_0');
                 if (active.length) {
                     id_modificado = active.closest("tr").find(".id_movimentacao").val();
 					editor.val(active.text())
