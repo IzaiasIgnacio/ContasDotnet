@@ -11,7 +11,7 @@ namespace Contas.ViewComponents {
     public class TabelaMesViewComponent : ViewComponent {
 
         public IViewComponentResult Invoke(List<Movimentacao> movimentacoes, DateTime mes, int indice, int linhas) {
-            var model = new TabelaMesViewModel(movimentacoes, mes, indice, linhas, ContasService.GetSaveMes(mes));
+            var model = new TabelaMesViewModel(movimentacoes, mes, indice, linhas);
             return View("TabelaMes", model);
         }
 

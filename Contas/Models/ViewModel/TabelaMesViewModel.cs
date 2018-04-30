@@ -12,36 +12,41 @@ namespace Contas.Models.ViewModel {
         public int Linhas;
         public int Indice;
         public string Save;
-        public string Folga;
+        //public string Folga;
         private DateTime data { get; set; }
         public List<Movimentacao> Movimentacoes { get; set; }
 
-        public TabelaMesViewModel(List<Movimentacao> movimentacoes, DateTime data, int indice, int linhas, decimal save) {
+        public TabelaMesViewModel(List<Movimentacao> movimentacoes, DateTime data, int indice, int linhas) {
             Movimentacoes = movimentacoes;
             this.data = data;
             Linhas = linhas;
             Indice = indice;
-            Save = save.ToString("F");
+            Save = "0";
             Double valor_mensal;
             Double sobra_atual;
             switch (indice) {
                 case 0:
                     salario = 0;
                     somar = ConsolidadoService.GetValoresConsolidados();
+                    Save = ContasService.GetSaveMes(data).ToString("F");
                 break;
                 case 1:
                     salario = Double.Parse(ConsolidadoService.GetValue("salario"), CultureInfo.InvariantCulture);
                     somar = ContasService.Sobra;
-                    valor_mensal = Double.Parse(ConsolidadoService.GetValue("mensal"), CultureInfo.InvariantCulture) / 4;
+                    valor_mensal = ConsolidadoService.GetValorMensal(data);
                     sobra_atual = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
-                    Folga = (sobra_atual - valor_mensal).ToString("F");
+                    //Folga = (sobra_atual - valor_mensal).ToString("F");
+                    Save = (sobra_atual - valor_mensal).ToString("F");
+                    ContasService.SetSaveMes(data, Save);
                 break;
                 default:
                     salario = Double.Parse(ConsolidadoService.GetValue("salario"), CultureInfo.InvariantCulture);
                     somar = ContasService.Sobra;
                     valor_mensal = Double.Parse(ConsolidadoService.GetValue("mensal"), CultureInfo.InvariantCulture)*indice;
                     sobra_atual = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
-                    Folga = (sobra_atual - valor_mensal).ToString("F");
+                    //Folga = (sobra_atual - valor_mensal).ToString("F");
+                    Save = (sobra_atual - valor_mensal).ToString("F");
+                    ContasService.SetSaveMes(data, Save);
                 break;
             }
         }
@@ -72,6 +77,11 @@ namespace Contas.Models.ViewModel {
             }
         }
 
-        
+        public int SaveId {
+            get {
+                return ContasService.GetSaveId(data);
+            }
+        }
+
     }
 }

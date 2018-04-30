@@ -1,6 +1,8 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    /*background-color: #ccc;
+    color: #fff;*/
 }
 
 /* Wrapping element */
@@ -13,6 +15,15 @@
 
 .body-content, .menu_container {
     width: 90%;
+}
+
+.table {
+    box-shadow: 5px 5px 5px #333;
+    /*background-color: #2e3338;*/
+}
+
+.table tbody td {
+    /*background-color: #49515a;*/
 }
 
 .table tfoot td {

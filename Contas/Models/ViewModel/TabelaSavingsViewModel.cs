@@ -12,7 +12,7 @@ namespace Contas.Models.ViewModel {
         private double somar;
 
         public TabelaSavingsViewModel(DateTime data, int indice, decimal save) {
-            this.Save = save.ToString("F");
+            Save = save.ToString("F");
             this.data = data;
             if (indice == 0) {
                 somar = Double.Parse(ConsolidadoService.GetValue("savings"), CultureInfo.InvariantCulture);
