@@ -18,7 +18,7 @@ namespace Contas.Repository {
             return valorOriginal;
         }
 
-        internal void AdicionarMovimentacao(string nome, DateTime data, string tipo, string valor, string status) {
+        public void AdicionarMovimentacao(string nome, DateTime data, string tipo, string valor, string status) {
             db.Movimentacao.Add(new Movimentacao {
                 Nome = nome,
                 Data = data,
@@ -27,6 +27,15 @@ namespace Contas.Repository {
                 Status = status
             });
             db.SaveChanges();
+        }
+
+        public string AtualizarStatus(int id, string status) {
+            Movimentacao movimentacao = db.Movimentacao.Find(id);
+            string status_anterior = movimentacao.Status;
+            movimentacao.Status = status;
+            db.Entry(movimentacao).State = EntityState.Modified;
+            db.SaveChanges();
+            return status_anterior;
         }
     }
 }

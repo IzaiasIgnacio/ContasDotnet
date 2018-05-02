@@ -1,0 +1,33 @@
+﻿@model Contas.Models.ViewModel.FormConsolidadosViewModel
+<div class="col-md-6">
+    <div class="form-group">
+        <label style="display:block">Casa</label>
+        @Html.TextBoxFor(model => model.Casa, new { @class = "form-control", @placeholder = "Casa", @Value = Model.Casa, @autofocus = true })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Inter</label>
+        @Html.TextBoxFor(model => model.Inter, new { @class = "form-control", @placeholder = "Inter", @Value = Model.Inter })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Itaú</label>
+        @Html.TextBoxFor(model => model.Itau, new { @class = "form-control", @placeholder = "Itaú", @Value = Model.Itau })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Savings</label>
+        @Html.TextBoxFor(model => model.Savings, new { @class = "form-control", @placeholder = "Savings", @Value = Model.Savings })
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label style="display:block">Salário</label>
+        @Html.TextBoxFor(model => model.Salario, new { @class = "form-control", @placeholder = "Salário", @Value = Model.Salario })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Mensal</label>
+        @Html.TextBoxFor(model => model.Mensal, new { @class = "form-control", @placeholder = "Mensal", @Value = Model.Mensal })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Mês Atual</label>
+        @Html.TextBoxFor(model => model.MesAtual, new { @class = "form-control", @placeholder = "Mês Atual", @Value = Model.MesAtual })
+    </div>
+</div>

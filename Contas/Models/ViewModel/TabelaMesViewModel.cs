@@ -12,7 +12,6 @@ namespace Contas.Models.ViewModel {
         public int Linhas;
         public int Indice;
         public string Save;
-        //public string Folga;
         private DateTime data { get; set; }
         public List<Movimentacao> Movimentacoes { get; set; }
 
@@ -35,7 +34,6 @@ namespace Contas.Models.ViewModel {
                     somar = ContasService.Sobra;
                     valor_mensal = ConsolidadoService.GetValorMensal(data);
                     sobra_atual = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
-                    //Folga = (sobra_atual - valor_mensal).ToString("F");
                     Save = (sobra_atual - valor_mensal).ToString("F");
                     ContasService.SetSaveMes(data, Save);
                 break;
@@ -44,7 +42,6 @@ namespace Contas.Models.ViewModel {
                     somar = ContasService.Sobra;
                     valor_mensal = Double.Parse(ConsolidadoService.GetValue("mensal"), CultureInfo.InvariantCulture)*indice;
                     sobra_atual = Double.Parse(Sobra.Replace(",", "."), CultureInfo.InvariantCulture);
-                    //Folga = (sobra_atual - valor_mensal).ToString("F");
                     Save = (sobra_atual - valor_mensal).ToString("F");
                     ContasService.SetSaveMes(data, Save);
                 break;
@@ -59,13 +56,15 @@ namespace Contas.Models.ViewModel {
 
         public string ValorTotal {
             get {
-                return Movimentacoes.Sum(m => m.Valor).ToString("F");
+                var gastos = Movimentacoes.Where(m => m.Tipo == "gasto" && m.Status != "pago").Sum(m => m.Valor);
+                var rendas = Movimentacoes.Where(m => m.Tipo == "renda").Sum(m => m.Valor);
+                return (gastos - rendas).ToString("F");
             }
         }
 
         public string Sobra {
             get {
-                ContasService.Sobra = ((salario + somar) - (Double)(Movimentacoes.Sum(m => m.Valor)) - Double.Parse(Save));
+                ContasService.Sobra = ((salario + somar) - (Double)(Movimentacoes.Where(m => m.Tipo == "gasto" && m.Status != "pago").Sum(m => m.Valor)) - Double.Parse(Save));
                 return ContasService.Sobra.ToString("F");
             }
         }

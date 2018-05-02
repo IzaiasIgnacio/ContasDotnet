@@ -5,6 +5,8 @@ using Contas.Models.Entity;
 using System.Linq;
 using Contas.Services;
 using System;
+using System.Globalization;
+using Contas.Models.ViewModel;
 
 namespace Contas.Controllers {
     public class JqueryController : Controller {
@@ -19,7 +21,8 @@ namespace Contas.Controllers {
         }
 
         [HttpPost]
-        public JsonResult AtualizarValorSaveJquery(int id, double diferenca) {
+        public JsonResult AtualizarValorSaveJquery(int id, string dif) {
+            Double diferenca = Double.Parse(dif, CultureInfo.InvariantCulture);
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
             var mes_modificado = movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Id == id).FirstOrDefault().Data.Value;
             var mes_atual = ConsolidadoService.GetValue("mes_atual");
@@ -39,6 +42,7 @@ namespace Contas.Controllers {
                 var ano = dt.Year;
                 var movimentacao_atualizar = movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Data.Value.Month == mes && m.Data.Value.Year == ano && m.Tipo == "save").FirstOrDefault();
                 var novo_valor = ((Double)movimentacao_atualizar.Valor - diferenca).ToString("F");
+                diferenca = 0;
                 movimentacaoRepository.AtualizarValor(movimentacao_atualizar.Id, novo_valor);
                 novos_valores.Add(i, novo_valor);
             }
@@ -52,6 +56,18 @@ namespace Contas.Controllers {
             string data = "01/" + mes_atual;
             DateTime data_modificada = Convert.ToDateTime(data);
             return ViewComponent("TabelaSavings", new { mes = data_modificada.AddMonths(indice), indice });
+        }
+
+        [HttpPost]
+        public string AtualizarStatusMovimentacao(int id, string status) {
+            MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
+            return movimentacaoRepository.AtualizarStatus(id, status);
+        }
+
+        [HttpPost]
+        public void AtualizarConsolidados(FormConsolidadosViewModel dados) {
+            ConsolidadoRepository consolidadoRepository = new ConsolidadoRepository();
+            consolidadoRepository.AtualizarConsolidados(dados);
         }
     }
 

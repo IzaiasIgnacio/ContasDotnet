@@ -75,6 +75,7 @@ namespace Contas.Services {
         }
 
         private static Dictionary<int, int> ValoresCalculo4Semanas = new Dictionary<int, int>() {
+            { 0, 4 },
             { 1, 4 },
             { 2, 3 },
             { 3, 2 },
@@ -82,6 +83,7 @@ namespace Contas.Services {
         };
 
         private static Dictionary<int, int> ValoresCalculo5Semanas = new Dictionary<int, int>() {
+            { 0, 5 },
             { 1, 5 },
             { 2, 4 },
             { 3, 3 },

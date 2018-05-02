@@ -296,6 +296,9 @@
 	    // it the user clicks outside the context menu, close it.
 	    _this.$container.on('click' + _this.closeNamespace, function() {
 	        _this.close();
+            $('td').each(function () {
+                $(this).removeClass('clicado');
+            });
 	    });
 	}
 

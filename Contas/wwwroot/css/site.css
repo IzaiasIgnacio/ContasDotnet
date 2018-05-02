@@ -1,12 +1,9 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
-    /*background-color: #ccc;
-    color: #fff;*/
+    background-color: #ccc;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
@@ -19,15 +16,21 @@
 
 .table {
     box-shadow: 5px 5px 5px #333;
-    /*background-color: #2e3338;*/
+}
+
+.table thead, .table tfoot {
+    background-color: #2e3338;
+    color: #fff;
+    font-weight: bold;
+}
+
+.table td, .table th {
+    border: 1px solid #000 !important;
 }
 
 .table tbody td {
-    /*background-color: #49515a;*/
-}
-
-.table tfoot td {
-    font-weight: bold;
+    background-color: #49515a;
+    color: #fff;
 }
 
 .table-condensed td, .table-condensed tfoot td, .table-condensed thead th {
@@ -49,4 +52,41 @@
 
 .divisor {
     margin-left: 55px;
+}
+
+.td_definido {
+    font-style: italic;
+}
+
+.td_normal {
+    font-style: normal;
+    font-weight: bold;
+    background-color: grey !important;
+}
+
+.td_renda {
+    background-color: forestgreen !important;
+}
+
+.td_pago {
+    background-color: royalblue !important;
+}
+
+.clicado {
+    background-color: #000 !important;
+}
+
+.navbar-brand, .navbar-brand:hover {
+    cursor: pointer;
+    color: #9d9d9d !important;
+}
+
+.modal-content {
+    background-color: #222;
+    color: #fff;
+}
+
+.modal-header {
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

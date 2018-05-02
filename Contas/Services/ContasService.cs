@@ -11,7 +11,7 @@ namespace Contas.Services {
         public static List<Movimentacao> GetMovimentacoes(DateTime data) {
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
             return movimentacaoRepository.Listar<Movimentacao>()
-                .Where(m => m.Data.Value.Month == data.Month && m.Data.Value.Year == data.Year && m.Tipo == "gasto")
+                .Where(m => m.Data.Value.Month == data.Month && m.Data.Value.Year == data.Year && m.Tipo != "save")
                 .ToList();
         }
 
