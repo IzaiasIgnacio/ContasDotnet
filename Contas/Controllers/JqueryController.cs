@@ -69,6 +69,12 @@ namespace Contas.Controllers {
             ConsolidadoRepository consolidadoRepository = new ConsolidadoRepository();
             consolidadoRepository.AtualizarConsolidados(dados);
         }
+
+        [HttpPost]
+        public void AtualizarMovimentacao(FormMovimentacaoViewModel dados) {
+            MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
+            movimentacaoRepository.AtualizarMovimentacao(dados);
+        }
     }
 
 }

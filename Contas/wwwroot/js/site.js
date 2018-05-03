@@ -136,6 +136,10 @@ $(".navbar-brand").click(function() {
     $("#modal_consolidado").modal('show');
 });
 
+$(".div_movimentacoes").on('click','.tabela_mes thead',function() {
+    $("#modal_movimentacao").modal('show');
+});
+
 $('#modal_consolidado').on('shown.bs.modal', function() {
     $(this).find('[autofocus]').focus();
 });
@@ -151,5 +155,19 @@ $(".footer_form_consolidados").on("click", ".salvar", function () {
     $.post("/Jquery/AtualizarConsolidados", json,
     function (resposta) {
         $("#modal_consolidado").modal('hide');
+    });
+});
+
+$(".footer_form_movimentacao").on("click", ".salvar", function () {
+    var array = $("#form_movimentacao").serializeArray();
+    var json = {};
+    
+    jQuery.each(array, function () {
+        json[this.name] = this.value || '';
+    });
+
+    $.post("/Jquery/AtualizarMovimentacao", json,
+    function (resposta) {
+        $("#modal_movimentacao").modal('hide');
     });
 });

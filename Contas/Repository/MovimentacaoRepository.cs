@@ -1,5 +1,6 @@
 ﻿using System;
 using Contas.Models.Entity;
+using Contas.Models.ViewModel;
 using Games.Models.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,6 +37,12 @@ namespace Contas.Repository {
             db.Entry(movimentacao).State = EntityState.Modified;
             db.SaveChanges();
             return status_anterior;
+        }
+
+        public void AtualizarMovimentacao(FormMovimentacaoViewModel dados) {
+            if (dados.Id == 0) {
+                AdicionarMovimentacao(dados.Nome, dados.Data, dados.Tipo, dados.Valor, dados.Status);
+            }
         }
     }
 }

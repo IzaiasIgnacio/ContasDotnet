@@ -1,0 +1,25 @@
+@model Contas.Models.ViewModel.FormMovimentacaoViewModel
+<div class="col-md-6">
+    <div class="form-group">
+        <label style="display:block">Nome</label>
+        @Html.TextBoxFor(model => model.Nome, new { @class = "form-control", @placeholder = "Nome", @Value = Model.Nome, @autofocus = true })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Data</label>
+        @Html.TextBoxFor(model => model.Data, new { @class = "form-control", @placeholder = "Data", @Value = Model.Data, @autofocus = true })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Tipo</label>
+        @Html.TextBoxFor(model => model.Tipo, new { @class = "form-control", @placeholder = "Tipo", @Value = Model.Tipo, @autofocus = true })
+    </div>
+</div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label style="display:block">Valor</label>
+        @Html.TextBoxFor(model => model.Valor, new { @class = "form-control", @placeholder = "Valor", @Value = Model.Valor, @autofocus = true })
+    </div>
+    <div class="form-group">
+        <label style="display:block">Status</label>
+        @Html.TextBoxFor(model => model.Status, new { @class = "form-control", @placeholder = "Status", @Value = Model.Status, @autofocus = true })
+    </div>
+</div>
