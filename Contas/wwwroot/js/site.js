@@ -127,6 +127,10 @@ var menu = new BootstrapMenu('.table tbody tr', {
         {
             name: 'Excluir',
             onClick: function () {
+                $.post("/Jquery/ExluirMovimentacao", { id: linha_clicada.find('.id_movimentacao').val() },
+                function (resposta) {
+                    
+                });
             }
         }
     ]

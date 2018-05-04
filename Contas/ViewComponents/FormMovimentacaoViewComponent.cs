@@ -1,4 +1,5 @@
-﻿using Contas.Models.ViewModel;
+﻿using System;
+using Contas.Models.ViewModel;
 using Contas.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ namespace Contas.ViewComponents {
     public class FormMovimentacaoViewComponent : ViewComponent {
         public IViewComponentResult Invoke() {
             var model = new FormMovimentacaoViewModel();
-            //model.Nome = ConsolidadoService.GetValue("casa");
+            model.Data = DateTime.Now.Date.ToShortDateString();
 
             return View("FormMovimentacao", model);
         }

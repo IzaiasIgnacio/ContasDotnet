@@ -10,7 +10,11 @@
     </div>
     <div class="form-group">
         <label style="display:block">Tipo</label>
-        @Html.TextBoxFor(model => model.Tipo, new { @class = "form-control", @placeholder = "Tipo", @Value = Model.Tipo, @autofocus = true })
+        <select name='tipo' class="form-control">
+            @foreach (var tipo in Model.ListaTipos) {
+                <option value="@tipo.nome">@tipo.nome</option>
+            }
+        </select>
     </div>
 </div>
 <div class="col-md-6">
@@ -20,6 +24,23 @@
     </div>
     <div class="form-group">
         <label style="display:block">Status</label>
-        @Html.TextBoxFor(model => model.Status, new { @class = "form-control", @placeholder = "Status", @Value = Model.Status, @autofocus = true })
+        <select name='status' class="form-control">
+            @foreach (var status in Model.ListaStatus) {
+                <option value="@status.nome">@status.nome</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label style="display:block">Cartão</label>
+        <select name='cartao' class="form-control">
+            <option value="">Nenhum</option>
+            @foreach (var cartao in Model.ListaCartoes) {
+                <option value="@cartao.Id">@cartao.Nome</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label style="display:block">Parcelas</label>
+        @Html.TextBoxFor(model => model.Parcelas, new { @class = "form-control", @placeholder = "Parcelas", @Value = Model.Parcelas })
     </div>
 </div>
