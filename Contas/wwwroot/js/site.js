@@ -175,3 +175,24 @@ $(".footer_form_movimentacao").on("click", ".salvar", function () {
         $("#modal_movimentacao").modal('hide');
     });
 });
+
+$(".tabela_mes tbody").sortable( {
+    helper: fixWidthHelper,
+	update: function(event, ui) {
+        var mov = new Array();
+        $(this).find('.id_movimentacao').each(function(index) {
+            mov.push($(this).val());
+        });
+        $.post("/Jquery/AtualizarPosicaoMovimentacoes", { movimentacoes: mov },
+        function (resposta) {
+            $("#modal_movimentacao").modal('hide');
+        });
+    }
+});
+
+function fixWidthHelper(e, ui) {
+    ui.children().each(function() {
+        $(this).width($(this).width());
+    });
+    return ui;
+}

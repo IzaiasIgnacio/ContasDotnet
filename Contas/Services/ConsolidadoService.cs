@@ -41,14 +41,14 @@ namespace Contas.Services {
             if (semanas_mes == 5) {
                 mult = ValoresCalculo5Semanas[semana_atual];
             }
-            return 340;
-            //return (consolidado_mensal / semanas_mes) * mult;
+            
+            return (consolidado_mensal / semanas_mes) * mult;
         }
 
-        public static int SemanaAtual() {
+        private static int SemanaAtual() {
             DateTime data_atual = DateTime.Now;
             DateTime inicio_mes = new DateTime(data_atual.Year, data_atual.Month, 1);
-            int sextas = 0;
+            int sextas = 1;
             int dia_atual = data_atual.Day;
             for (int i = 0; i < dia_atual; i++) {
                 if (inicio_mes.AddDays(i).DayOfWeek == DayOfWeek.Friday) {

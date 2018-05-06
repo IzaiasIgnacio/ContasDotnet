@@ -10,9 +10,27 @@ namespace Contas.Services {
 
         public static List<Movimentacao> GetMovimentacoes(DateTime data) {
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
+            SetValoresFixosMes(data, movimentacaoRepository);
             return movimentacaoRepository.Listar<Movimentacao>()
                 .Where(m => m.Data.Value.Month == data.Month && m.Data.Value.Year == data.Year && m.Tipo != "save")
+                .OrderBy(m =>m.Posicao)
                 .ToList();
+        }
+
+        private static void SetValoresFixosMes(DateTime data, MovimentacaoRepository movimentacaoRepository) {
+            Dictionary<string, Double> valores_fixos = new Dictionary<string, Double>() {
+                {"virtua", 220},
+                {"netflix", 37.9},
+                {"m", 800},
+                {"passion", 258},
+                {"cel", 42.99}
+            };
+
+            foreach (var valor in valores_fixos) {
+                if (!movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Nome == valor.Key && m.Data.Value.Month == data.Month && m.Data.Value.Year == data.Year).Any()) {
+                    movimentacaoRepository.AdicionarMovimentacao(valor.Key, new DateTime(data.Year, data.Month, 1) , "gasto", valor.Value.ToString(), "definido");
+                }
+            }
         }
 
         public static decimal GetSaveMes(DateTime mes) {

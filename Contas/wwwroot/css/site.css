@@ -90,3 +90,23 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
+
+.dot {
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    border: 1px solid #fff;
+}
+.nubank_dot {
+    background-color: purple;
+}
+
+.digio_dot {
+    background-color: blue;
+}
+
+.inter_dot {
+    background-color: orangered;
+}

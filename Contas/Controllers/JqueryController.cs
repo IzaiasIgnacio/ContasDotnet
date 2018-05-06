@@ -81,6 +81,12 @@ namespace Contas.Controllers {
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
             movimentacaoRepository.ExluirMovimentacao(id);
         }
+
+        [HttpPost]
+        public void AtualizarPosicaoMovimentacoes(string[] movimentacoes) {
+            MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
+            movimentacaoRepository.AtualizarPosicaoMovimentacoes(movimentacoes);
+        }
     }
 
 }

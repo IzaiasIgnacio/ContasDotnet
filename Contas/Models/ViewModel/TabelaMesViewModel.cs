@@ -82,5 +82,17 @@ namespace Contas.Models.ViewModel {
             }
         }
 
+        public string GetImagemCartao(int? id_cartao) {
+            switch (id_cartao) {
+                case 1:
+                    return "<span class='dot nubank_dot'></span>";
+                case 2:
+                    return "<span class='dot digio_dot'></span>";
+                case 3:
+                    return "<span class='dot inter_dot'></span>";
+            }
+            return null;
+        }
+
     }
 }

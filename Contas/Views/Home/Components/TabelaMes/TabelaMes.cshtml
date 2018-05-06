@@ -10,7 +10,7 @@
         @for (int i=0; i<Model.Linhas; i++) {
             if (@Model.Movimentacoes.ElementAtOrDefault(i) != null) {
                 <tr>
-                    <td class="td_@Model.Movimentacoes[i].Status td_@Model.Movimentacoes[i].Tipo"><input type="hidden" class="id_movimentacao" value="@Model.Movimentacoes[i].Id" />@Model.Movimentacoes[i].Nome</td>
+                    <td class="td_@Model.Movimentacoes[i].Status td_@Model.Movimentacoes[i].Tipo"><input type="hidden" class="id_movimentacao" value="@Model.Movimentacoes[i].Id" />@Model.Movimentacoes[i].Nome @Html.Raw(@Model.GetImagemCartao(@Model.Movimentacoes[i].IdCartao))</td>
                     <td class="text-right td_valor td_@Model.Movimentacoes[i].Status td_@Model.Movimentacoes[i].Tipo">@Model.Movimentacoes[i].Valor</td>
                 </tr>
             }

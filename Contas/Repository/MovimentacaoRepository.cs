@@ -66,5 +66,13 @@ namespace Contas.Repository {
             db.Remove(db.Movimentacao.Find(id));
             db.SaveChanges();
         }
+
+        public void AtualizarPosicaoMovimentacoes(string[] movimentacoes) {
+            for (int i=1;i<=movimentacoes.Length;i++) {
+                Movimentacao m = db.Movimentacao.Find(Int32.Parse(movimentacoes.ElementAtOrDefault(i-1)));
+                m.Posicao = i;
+            }
+            db.SaveChanges();
+        }
     }
 }
