@@ -74,5 +74,9 @@ namespace Contas.Repository {
             }
             db.SaveChanges();
         }
+
+        public Movimentacao GetById(int id) {
+            return db.Movimentacao.Find(id);
+        }
     }
 }

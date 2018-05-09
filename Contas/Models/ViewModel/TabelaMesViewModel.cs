@@ -64,7 +64,10 @@ namespace Contas.Models.ViewModel {
 
         public string Sobra {
             get {
-                ContasService.Sobra = ((salario + somar) - (Double)(Movimentacoes.Where(m => m.Tipo == "gasto" && m.Status != "pago").Sum(m => m.Valor)) - Double.Parse(Save));
+                var saldo_parcial = salario + somar;
+                var gastos = (Double) Movimentacoes.Where(m => m.Tipo == "gasto" && m.Status != "pago").Sum(m => m.Valor);
+                var rendas = (Double) Movimentacoes.Where(m => m.Tipo == "renda").Sum(m => m.Valor);
+                ContasService.Sobra = saldo_parcial - gastos + rendas - Double.Parse(Save);
                 return ContasService.Sobra.ToString("F");
             }
         }

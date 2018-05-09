@@ -87,6 +87,17 @@ namespace Contas.Controllers {
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
             movimentacaoRepository.AtualizarPosicaoMovimentacoes(movimentacoes);
         }
+
+        [HttpPost]
+        public ActionResult ExibirFormMovimentacao(int id) {
+            MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
+            var movimentacao = movimentacaoRepository.GetById(id);
+            var model = new FormMovimentacaoViewModel();
+            model.Id = id;
+            model.Nome = movimentacao.Nome;
+            
+            return ViewComponent("FormMovimentacao", model);
+        }
     }
 
 }

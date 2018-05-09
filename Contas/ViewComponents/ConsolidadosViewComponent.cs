@@ -19,7 +19,11 @@ namespace Contas.ViewComponents {
             model.Savings = Double.Parse(ConsolidadoService.GetValue("savings"), CultureInfo.InvariantCulture).ToString("F");
             List<Cartao> cartoes = ConsolidadoService.GetCartoes();
             foreach (var cartao in cartoes) {
-                model.Cartoes.Add(new CartaoConsolidado {Nome = cartao.Nome, CreditoAtual = cartao.Credito - ConsolidadoService.GetGastosCartao(cartao.Id), CreditoTotal = cartao.Credito});
+                model.Cartoes.Add(new CartaoConsolidado {
+                    Nome = cartao.Nome,
+                    CreditoAtual = cartao.Credito - ConsolidadoService.GetGastosCartao(cartao.Id),
+                    CreditoTotal = cartao.Credito
+                });
             }
             return View("Consolidados", model);
         }

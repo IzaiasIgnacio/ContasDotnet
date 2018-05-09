@@ -122,6 +122,11 @@ var menu = new BootstrapMenu('.table tbody tr', {
             name: 'Editar',
             iconClass: 'fa-pencil',
             onClick: function () {
+                $.post("/Jquery/ExibirFormMovimentacao", { id: linha_clicada.find('.id_movimentacao').val() },
+                function (resposta) {
+                    $("#form_movimentacao").html(resposta);
+                    $("#modal_movimentacao").modal('show');
+                });
             }
         },
         {
