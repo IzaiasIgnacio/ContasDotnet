@@ -56,10 +56,20 @@ namespace Contas.Repository {
         }
 
         public void AtualizarMovimentacao(FormMovimentacaoViewModel dados) {
+            DateTime data = DateTime.Parse(dados.Data);
             if (dados.Id == 0) {
-                DateTime data = DateTime.Parse(dados.Data);
                 AdicionarMovimentacao(dados.Nome, data, dados.Tipo, dados.Valor, dados.Status, dados.Cartao, Int32.Parse(dados.Parcelas));
+                return;
             }
+            var movimentacao = db.Movimentacao.Find(dados.Id);
+            movimentacao.Nome = dados.Nome;
+            movimentacao.Data = data;
+            movimentacao.Tipo = dados.Tipo;
+            movimentacao.Valor = decimal.Parse(dados.Valor);
+            movimentacao.Status = dados.Status;
+            movimentacao.IdCartao = dados.Cartao;
+            db.Entry(movimentacao).State = EntityState.Modified;
+            db.SaveChanges();
         }
 
         public void ExluirMovimentacao(int id) {

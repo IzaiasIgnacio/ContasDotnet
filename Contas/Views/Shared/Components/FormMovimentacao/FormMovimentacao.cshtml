@@ -1,5 +1,5 @@
 @model Contas.Models.ViewModel.FormMovimentacaoViewModel
-<input type="hidden" id="id_movimentacao_form" value="@Model.Id">
+<input type="hidden" name="Id" value="@Model.Id">
 <div class="col-md-6">
     <div class="form-group">
         <label style="display:block">Nome</label>
@@ -13,6 +13,10 @@
         <label style="display:block">Tipo</label>
         <select name='tipo' class="form-control">
             @foreach (var tipo in Model.ListaTipos) {
+                string sel = null;
+                if (Model.Tipo == tipo.nome) {
+                    sel = "selected";
+                }
                 <option value="@tipo.nome">@tipo.nome</option>
             }
         </select>
@@ -27,7 +31,11 @@
         <label style="display:block">Status</label>
         <select name='status' class="form-control">
             @foreach (var status in Model.ListaStatus) {
-                <option value="@status.nome">@status.nome</option>
+                string sel = null;
+                if (Model.Status == status.nome) {
+                    sel = "selected";
+                }
+                <option value="@status.nome" selected=@sel>@status.nome</option>
             }
         </select>
     </div>
@@ -36,7 +44,11 @@
         <select name='cartao' class="form-control">
             <option value="">Nenhum</option>
             @foreach (var cartao in Model.ListaCartoes) {
-                <option value="@cartao.Id">@cartao.Nome</option>
+                string sel = null;
+                if (Model.Cartao == cartao.Id) {
+                    sel = "selected";
+                }
+                <option value="@cartao.Id" selected=@sel>@cartao.Nome</option>
             }
         </select>
     </div>

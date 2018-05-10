@@ -26,7 +26,7 @@ namespace Contas.Models.ViewModel {
                 parcelas = value;
             }
         }
-        public int Cartao { get; set; }
+        public int? Cartao { get; set; }
         public List<Tipo> ListaTipos {
             get {
                 return TiposCollection.Tipos;

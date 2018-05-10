@@ -64,12 +64,12 @@
     background-color: grey !important;
 }
 
-.td_renda {
-    background-color: forestgreen !important;
-}
-
 .td_pago {
     background-color: royalblue !important;
+}
+
+.td_renda {
+    background-color: forestgreen !important;
 }
 
 .clicado {

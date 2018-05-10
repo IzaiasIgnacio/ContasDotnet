@@ -13,6 +13,7 @@ namespace Contas.Models.Collections {
                 status = new List<Status>();
                 status.Add(new Status { nome = "normal"});
                 status.Add(new Status { nome = "definido"});
+                status.Add(new Status { nome = "pago"});
                 return status;
             }
         }

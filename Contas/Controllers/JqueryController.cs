@@ -95,6 +95,11 @@ namespace Contas.Controllers {
             var model = new FormMovimentacaoViewModel();
             model.Id = id;
             model.Nome = movimentacao.Nome;
+            model.Data = movimentacao.Data.Value.ToShortDateString();
+            model.Tipo = movimentacao.Tipo;
+            model.Valor = movimentacao.Valor.ToString();
+            model.Status = movimentacao.Status;
+            model.Cartao = movimentacao.IdCartao;
             
             return ViewComponent("FormMovimentacao", model);
         }
