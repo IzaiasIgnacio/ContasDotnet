@@ -132,10 +132,7 @@ var menu = new BootstrapMenu('.table tbody tr', {
         {
             name: 'Excluir',
             onClick: function () {
-                $.post("/Jquery/ExluirMovimentacao", { id: linha_clicada.find('.id_movimentacao').val() },
-                function (resposta) {
-                    
-                });
+                $.post("/Jquery/ExluirMovimentacao", { id: linha_clicada.find('.id_movimentacao').val() });
             }
         }
     ]
@@ -143,6 +140,14 @@ var menu = new BootstrapMenu('.table tbody tr', {
 
 $(".navbar-brand").click(function() {
     $("#modal_consolidado").modal('show');
+});
+
+$("#exportar").click(function () {
+    $(".slow-spin").fadeIn();
+    $.post("/Jquery/ExportarContasJquery",
+    function (resposta) {
+        $(".slow-spin").fadeOut();
+    });
 });
 
 $(".div_movimentacoes").on('click','.tabela_mes thead',function() {

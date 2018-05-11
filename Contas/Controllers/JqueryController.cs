@@ -103,6 +103,12 @@ namespace Contas.Controllers {
             
             return ViewComponent("FormMovimentacao", model);
         }
+
+        [HttpPost]
+        public void ExportarContasJquery() {
+            PlanilhaService planilhaService = new PlanilhaService();
+            planilhaService.AtualizarPlanilha();
+        }
     }
 
 }
