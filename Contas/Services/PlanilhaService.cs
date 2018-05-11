@@ -15,8 +15,9 @@ namespace Contas.Services {
         SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum valueInputOption;
         SheetsService sheetsService;
         Spreadsheet planilhas;
-        string id_planilha;
+        string idPlanilha;
         Double sobra;
+        int maximoMovimentacoes;
 
         public PlanilhaService() {
             string[] Scopes = { SheetsService.Scope.Spreadsheets };
@@ -43,18 +44,20 @@ namespace Contas.Services {
                 ApplicationName = "Google-SheetsSample/0.1",
             });
 
-            id_planilha = "1I6SEQnarqrTfe2uiyiaBgpxSdof8KE5DQaK4g7f15e4";
+            idPlanilha = "1I6SEQnarqrTfe2uiyiaBgpxSdof8KE5DQaK4g7f15e4";
+
+            maximoMovimentacoes = GetMaximoMovimentacoes();
         }
 
         public void AtualizarPlanilha() {
-            SpreadsheetsResource.GetRequest get = sheetsService.Spreadsheets.Get(id_planilha);
+            SpreadsheetsResource.GetRequest get = sheetsService.Spreadsheets.Get(idPlanilha);
             planilhas = get.Execute();
 
             valueInputOption = (SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum)2;
 
             foreach (Sheet planilha in planilhas.Sheets) {
                 ClearValuesRequest clearRequest = new ClearValuesRequest();
-                SpreadsheetsResource.ValuesResource.ClearRequest request = sheetsService.Spreadsheets.Values.Clear(clearRequest, id_planilha, "!A1:Z1000");
+                SpreadsheetsResource.ValuesResource.ClearRequest request = sheetsService.Spreadsheets.Values.Clear(clearRequest, idPlanilha, "!A1:Z1000");
                 request.Execute();
 
                 for (int i=0;i<=5;i++) {
@@ -78,10 +81,17 @@ namespace Contas.Services {
                 saldo_parcial = sobra + Double.Parse(ConsolidadoService.GetValue("salario"));
             }
 
-            dados.Add(new List<object>() { mes.ToString("MMMM", CultureInfo.CreateSpecificCulture("pt-BR")), saldo_parcial.ToString("F") });
-            foreach (var movimentacao in movimentacoes) {
-                dados.Add(new List<object>() { movimentacao.Nome, movimentacao.Valor.ToString("F") });
+            var dt = mes.ToString("MMMM", CultureInfo.CreateSpecificCulture("pt-BR"));
+            dados.Add(new List<object>() { dt.First().ToString().ToUpper()+ dt.Substring(1), saldo_parcial.ToString("F") });
+            for (int i=0;i<maximoMovimentacoes;i++) {
+                if (movimentacoes.ElementAtOrDefault(i) != null) {
+                    dados.Add(new List<object>() { movimentacoes[i].Nome, movimentacoes[i].Valor.ToString("F") });
+                }
+                else {
+                    dados.Add(new List<object>() { null });
+                }
             }
+            
             var save = (Double) ContasService.GetSaveMes(mes);
             dados.Add(new List<object>() { "Save", save.ToString("F") });
 
@@ -99,7 +109,7 @@ namespace Contas.Services {
             ValueRange valueRange = new ValueRange();
             valueRange.Values = dados;
 
-            SpreadsheetsResource.ValuesResource.UpdateRequest updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, id_planilha, range);
+            SpreadsheetsResource.ValuesResource.UpdateRequest updateRequest = sheetsService.Spreadsheets.Values.Update(valueRange, idPlanilha, range);
             updateRequest.ValueInputOption = valueInputOption;
 
             UpdateValuesResponse resposta = updateRequest.Execute();
@@ -138,7 +148,7 @@ namespace Contas.Services {
             batch.Requests.Add(alignRightRequest);
             //batch.Requests.Add(resizeRequest);
 
-            SpreadsheetsResource.BatchUpdateRequest u = sheetsService.Spreadsheets.BatchUpdate(batch, id_planilha);
+            SpreadsheetsResource.BatchUpdateRequest u = sheetsService.Spreadsheets.BatchUpdate(batch, idPlanilha);
             BatchUpdateSpreadsheetResponse responseResize = u.Execute();
         }
     
@@ -156,6 +166,18 @@ namespace Contas.Services {
                     return 'Q';
             }
             return 'B';
+        }
+
+        private int GetMaximoMovimentacoes() {
+            int maximo = 0;
+            for (int i=0;i<=5;i++) {
+                DateTime mes = DateTime.Now.AddMonths(i);
+                int valor = ContasService.GetMovimentacoes(mes).Count;
+                if (valor > maximo) {
+                    maximo = valor;
+                }
+            }
+            return maximo;
         }
         
     }
