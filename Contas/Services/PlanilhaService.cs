@@ -85,7 +85,7 @@ namespace Contas.Services {
             dados.Add(new List<object>() { dt.First().ToString().ToUpper()+ dt.Substring(1), saldo_parcial.ToString("F") });
             for (int i=0;i<maximoMovimentacoes;i++) {
                 if (movimentacoes.ElementAtOrDefault(i) != null) {
-                    dados.Add(new List<object>() { movimentacoes[i].Nome, movimentacoes[i].Valor.ToString("F") });
+                    dados.Add(new List<object>() { movimentacoes[i].Nome+ContasService.GetSiglaCartao(movimentacoes[i].IdCartao), movimentacoes[i].Valor.ToString("F") });
                 }
                 else {
                     dados.Add(new List<object>() { null });
@@ -116,37 +116,33 @@ namespace Contas.Services {
         }
 
         private void Layout() {
-            Request alignLeftRequest = new Request();
-            alignLeftRequest.RepeatCell = new RepeatCellRequest();
-            alignLeftRequest.RepeatCell.Fields = "userEnteredFormat(HorizontalAlignment)";
-            alignLeftRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 1, EndColumnIndex = 2 };
-            alignLeftRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 4, EndColumnIndex = 5 };
-            alignLeftRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 7, EndColumnIndex = 8 };
-            alignLeftRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 10, EndColumnIndex = 11 };
-            alignLeftRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 13, EndColumnIndex = 14 };
-            alignLeftRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 16, EndColumnIndex = 17 };
-            alignLeftRequest.RepeatCell.Cell = new CellData { UserEnteredFormat = new CellFormat { HorizontalAlignment = "LEFT" } };
+            var limite = maximoMovimentacoes + 2;
+            Request clearBoldRequest = new Request();
+            clearBoldRequest.RepeatCell = new RepeatCellRequest();
+            clearBoldRequest.RepeatCell.Fields = "userEnteredFormat(textFormat)";
+            clearBoldRequest.RepeatCell.Range = new GridRange {
+                SheetId = planilhas.Sheets[0].Properties.SheetId,
+                StartColumnIndex = 1,
+                EndColumnIndex = 18,
+                StartRowIndex = 2,
+                EndRowIndex = limite };
+            clearBoldRequest.RepeatCell.Cell = new CellData { UserEnteredFormat = new CellFormat { TextFormat = new TextFormat { Bold = false } } };
 
-            Request alignRightRequest = new Request();
-            alignRightRequest.RepeatCell = new RepeatCellRequest();
-            alignRightRequest.RepeatCell.Fields = "userEnteredFormat(HorizontalAlignment)";
-            alignRightRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 2, EndColumnIndex = 3 };
-            alignRightRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 5, EndColumnIndex = 6 };
-            alignRightRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 8, EndColumnIndex = 9 };
-            alignRightRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 11, EndColumnIndex = 12 };
-            alignRightRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 14, EndColumnIndex = 15 };
-            alignRightRequest.RepeatCell.Range = new GridRange { SheetId = planilhas.Sheets[0].Properties.SheetId, StartColumnIndex = 17, EndColumnIndex = 18 };
-            alignRightRequest.RepeatCell.Cell = new CellData { UserEnteredFormat = new CellFormat { HorizontalAlignment = "Right" } };
-
-            // Request resizeRequest = new Request();
-            // resizeRequest.AutoResizeDimensions = new AutoResizeDimensionsRequest();
-            // resizeRequest.AutoResizeDimensions.Dimensions = new DimensionRange { SheetId = planilhas.Sheets[0].Properties.SheetId, Dimension = "COLUMNS", StartIndex = 0, EndIndex = 1 };
-
+            Request boldRequest = new Request();
+            boldRequest.RepeatCell = new RepeatCellRequest();
+            boldRequest.RepeatCell.Fields = "userEnteredFormat(textFormat)";
+            boldRequest.RepeatCell.Range = new GridRange {
+                SheetId = planilhas.Sheets[0].Properties.SheetId,
+                StartColumnIndex = 1,
+                EndColumnIndex = 18,
+                StartRowIndex = limite,
+                EndRowIndex = limite + 2 };
+            boldRequest.RepeatCell.Cell = new CellData { UserEnteredFormat = new CellFormat { TextFormat = new TextFormat { Bold = true } } };
+            
             BatchUpdateSpreadsheetRequest batch = new BatchUpdateSpreadsheetRequest();
             batch.Requests = new List<Request>();
-            batch.Requests.Add(alignLeftRequest);
-            batch.Requests.Add(alignRightRequest);
-            //batch.Requests.Add(resizeRequest);
+            batch.Requests.Add(clearBoldRequest);
+            batch.Requests.Add(boldRequest);
 
             SpreadsheetsResource.BatchUpdateRequest u = sheetsService.Spreadsheets.BatchUpdate(batch, idPlanilha);
             BatchUpdateSpreadsheetResponse responseResize = u.Execute();

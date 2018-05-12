@@ -57,5 +57,13 @@ namespace Contas.Services {
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
             return movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Tipo == "save" && m.Data.Value.Month == data.Month && m.Data.Value.Year == data.Year).FirstOrDefault().Id;
         }
+
+        public static string GetSiglaCartao(int? id) {
+            if (id == null) {
+                return null;
+            }
+            CartaoRepository cartaoRepository = new CartaoRepository();
+            return " ["+cartaoRepository.Listar<Cartao>().Where(c => c.Id == id).FirstOrDefault().Sigla+"]";
+        }
     }
 }
