@@ -24,6 +24,7 @@ namespace Contas.Controllers {
                 SetLinhas(mov.Count);
             }
             index.linhas = linhas;
+            // PlanilhaService.AtualizarPlanilha();
             return View(index);
         }
 

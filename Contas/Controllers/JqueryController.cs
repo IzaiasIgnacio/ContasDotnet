@@ -106,8 +106,7 @@ namespace Contas.Controllers {
 
         [HttpPost]
         public void ExportarContasJquery() {
-            PlanilhaService planilhaService = new PlanilhaService();
-            planilhaService.AtualizarPlanilha();
+            PlanilhaService.AtualizarPlanilha();
         }
     }
 

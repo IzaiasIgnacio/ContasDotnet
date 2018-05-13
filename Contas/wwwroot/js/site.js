@@ -10,6 +10,7 @@ $('table tbody td.td_valor, .save_0').on('change', function (evt, newValue) {
     function (resposta) {
         if (resposta != "0") {
             AtualizarMes(tb, id_modificado, newValue, resposta);
+            setAtualizarPlanilha();
         }
     });
 });
@@ -66,6 +67,7 @@ function AtualizarStatusMovimentacao(id, status) {
                 break;
             }
             AtualizarMes(tabela_clicada, id_clicado, novo_valor, valor_original);
+            setAtualizarPlanilha();
         }
     });
 }
@@ -94,6 +96,7 @@ var menu = new BootstrapMenu('.table tbody tr', {
                     $(this).removeClass('td_pago');
                     $(this).addClass('td_normal');
                 });
+                setAtualizarPlanilha();
             }
         },
         {
@@ -105,6 +108,7 @@ var menu = new BootstrapMenu('.table tbody tr', {
                     $(this).removeClass('td_pago');
                     $(this).removeClass('td_normal');
                 });
+                setAtualizarPlanilha();
             }
         },
         {
@@ -116,6 +120,7 @@ var menu = new BootstrapMenu('.table tbody tr', {
                     $(this).addClass('td_pago');
                     $(this).removeClass('td_normal');
                 });
+                setAtualizarPlanilha();
             }
         },
         {
@@ -133,6 +138,7 @@ var menu = new BootstrapMenu('.table tbody tr', {
             name: 'Excluir',
             onClick: function () {
                 $.post("/Jquery/ExluirMovimentacao", { id: linha_clicada.find('.id_movimentacao').val() });
+                setAtualizarPlanilha();
             }
         }
     ]
@@ -147,6 +153,7 @@ $("#exportar").click(function () {
     $.post("/Jquery/ExportarContasJquery",
     function (resposta) {
         $(".slow-spin").fadeOut();
+        setPlanilhaAtualizada();
     });
 });
 
@@ -169,6 +176,7 @@ $(".footer_form_consolidados").on("click", ".salvar", function () {
     $.post("/Jquery/AtualizarConsolidados", json,
     function (resposta) {
         $("#modal_consolidado").modal('hide');
+        setAtualizarPlanilha();
     });
 });
 
@@ -183,6 +191,7 @@ $(".footer_form_movimentacao").on("click", ".salvar", function () {
     $.post("/Jquery/AtualizarMovimentacao", json,
     function (resposta) {
         $("#modal_movimentacao").modal('hide');
+        setAtualizarPlanilha();
     });
 });
 
@@ -205,4 +214,12 @@ function fixWidthHelper(e, ui) {
         $(this).width($(this).width());
     });
     return ui;
+}
+
+function setAtualizarPlanilha() {
+    $("#exportar").css("color", "red");
+}
+
+function setPlanilhaAtualizada() {
+    $("#exportar").css("color", "#fff");
 }
