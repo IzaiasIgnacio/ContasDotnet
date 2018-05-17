@@ -22,7 +22,8 @@ namespace Contas.ViewComponents {
                 model.Cartoes.Add(new CartaoConsolidado {
                     Nome = cartao.Nome,
                     CreditoAtual = cartao.Credito - ConsolidadoService.GetGastosCartao(cartao.Id),
-                    CreditoTotal = cartao.Credito
+                    CreditoTotal = cartao.Credito,
+                    Numero = cartao.Numero
                 });
             }
             return View("Consolidados", model);

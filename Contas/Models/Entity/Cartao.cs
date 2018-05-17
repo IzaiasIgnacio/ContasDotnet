@@ -12,6 +12,7 @@ namespace Contas.Models.Entity
 
         public int Id { get; set; }
         public string Nome { get; set; }
+        public string Numero { get; set; }
         public string Sigla { get; set; }
         public decimal Credito { get; set; }
 

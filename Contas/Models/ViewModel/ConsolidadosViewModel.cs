@@ -22,6 +22,7 @@ namespace Contas.Models.ViewModel {
             public string Nome;
             public decimal CreditoAtual;
             public decimal CreditoTotal;
+            public string Numero;
         }
     }
 }

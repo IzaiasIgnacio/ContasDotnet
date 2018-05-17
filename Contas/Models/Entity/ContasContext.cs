@@ -36,6 +36,10 @@ namespace Contas.Models.Entity
                     .HasColumnName("nome")
                     .HasMaxLength(20);
 
+                entity.Property(e => e.Numero)
+                    .HasColumnName("numero")
+                    .HasMaxLength(16);
+
                 entity.Property(e => e.Sigla)
                     .IsRequired()
                     .HasColumnName("sigla")

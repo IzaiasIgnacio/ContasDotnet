@@ -24,7 +24,7 @@ namespace Contas.Controllers {
         public JsonResult AtualizarValorSaveJquery(int id, string dif) {
             Double diferenca = Double.Parse(dif, CultureInfo.InvariantCulture);
             MovimentacaoRepository movimentacaoRepository = new MovimentacaoRepository();
-            var mes_modificado = movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Id == id).FirstOrDefault().Data.Value;
+            var mes_modificado = movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Id == id).FirstOrDefault().Data;
             var mes_atual = ConsolidadoService.GetValue("mes_atual");
             string data = "01/" + mes_atual;
             DateTime data_atual = Convert.ToDateTime(data);
@@ -40,7 +40,7 @@ namespace Contas.Controllers {
                 var dt = data_atual.AddMonths(i);
                 var mes = dt.Month;
                 var ano = dt.Year;
-                var movimentacao_atualizar = movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Data.Value.Month == mes && m.Data.Value.Year == ano && m.Tipo == "save").FirstOrDefault();
+                var movimentacao_atualizar = movimentacaoRepository.Listar<Movimentacao>().Where(m => m.Data.Month == mes && m.Data.Year == ano && m.Tipo == "save").FirstOrDefault();
                 var novo_valor = ((Double)movimentacao_atualizar.Valor - diferenca).ToString("F");
                 diferenca = 0;
                 movimentacaoRepository.AtualizarValor(movimentacao_atualizar.Id, novo_valor);
@@ -95,7 +95,7 @@ namespace Contas.Controllers {
             var model = new FormMovimentacaoViewModel();
             model.Id = id;
             model.Nome = movimentacao.Nome;
-            model.Data = movimentacao.Data.Value.ToShortDateString();
+            model.Data = movimentacao.Data.ToShortDateString();
             model.Tipo = movimentacao.Tipo;
             model.Valor = movimentacao.Valor.ToString();
             model.Status = movimentacao.Status;

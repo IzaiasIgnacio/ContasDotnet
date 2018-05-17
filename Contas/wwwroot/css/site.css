@@ -116,3 +116,12 @@
     animation: fa-spin 3s infinite linear;
     font-size: 15px;
 }
+
+.topo_cartoes {
+    padding: 0;
+}
+
+.col_valores {
+    margin-left: -5px;
+    margin-top: -5px;
+}
