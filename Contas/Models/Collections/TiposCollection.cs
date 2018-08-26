@@ -13,6 +13,7 @@ namespace Contas.Models.Collections {
                 tipos = new List<Tipo>();
                 tipos.Add(new Tipo { nome = "gasto"});
                 tipos.Add(new Tipo { nome = "renda"});
+                tipos.Add(new Tipo { nome = "terceiros" });
                 return tipos;
             }
         }

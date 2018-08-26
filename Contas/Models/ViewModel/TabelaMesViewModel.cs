@@ -57,8 +57,7 @@ namespace Contas.Models.ViewModel {
         public string ValorTotal {
             get {
                 var gastos = Movimentacoes.Where(m => m.Tipo == "gasto" && m.Status != "pago").Sum(m => m.Valor);
-                var rendas = Movimentacoes.Where(m => m.Tipo == "renda").Sum(m => m.Valor);
-                return (gastos - rendas).ToString("F");
+                return gastos.ToString("F");
             }
         }
 

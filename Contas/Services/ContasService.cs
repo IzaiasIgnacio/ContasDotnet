@@ -19,11 +19,11 @@ namespace Contas.Services {
 
         private static void SetValoresFixosMes(DateTime data, MovimentacaoRepository movimentacaoRepository) {
             Dictionary<string, Double> valores_fixos = new Dictionary<string, Double>() {
-                {"virtua", 220},
+                {"virtua", 227},
                 {"netflix", 37.9},
-                {"m", 800},
+                {"m", 1300},
                 {"passion", 258},
-                {"cel", 42.99}
+                {"vivo", 42.99}
             };
 
             foreach (var valor in valores_fixos) {

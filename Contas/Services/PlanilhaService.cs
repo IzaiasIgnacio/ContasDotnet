@@ -105,7 +105,7 @@ namespace Contas.Services {
             dados.Add(new List<object>() { dt.First().ToString().ToUpper()+ dt.Substring(1), saldo_mes });
             for (int i=0;i<maximoMovimentacoes;i++) {
                 if (movimentacoes.ElementAtOrDefault(i) != null) {
-                    dados.Add(new List<object>() { movimentacoes[i].Nome+ContasService.GetSiglaCartao(movimentacoes[i].IdCartao), movimentacoes[i].Valor.ToString("F") });
+                    dados.Add(new List<object>() { "'"+movimentacoes[i].Nome+ContasService.GetSiglaCartao(movimentacoes[i].IdCartao), movimentacoes[i].Valor.ToString("F") });
                 }
                 else {
                     dados.Add(new List<object>() { null });
@@ -121,9 +121,8 @@ namespace Contas.Services {
             dados.Add(new List<object>() { "Total", "=SUM("+proxima+"3:"+proxima+limite+")" });
 
             var gastos = (Double) movimentacoes.Where(m => m.Tipo == "gasto" && m.Status != "pago").Sum(m => m.Valor);
-            var rendas = (Double) movimentacoes.Where(m => m.Tipo == "renda").Sum(m => m.Valor);
-            sobra = saldo_parcial - gastos + rendas - save;
-            dados.Add(new List<object>() { "Sobra", "="+proxima+"2-"+proxima+linha_total+"-"+proxima+linha_save });
+            sobra = saldo_parcial - gastos - save;
+            // dados.Add(new List<object>() { "Sobra", "="+proxima+"2-"+proxima+linha_total+"-"+proxima+linha_save });
             
             string range = "!"+coluna+"2:"+proxima+dados.Count+1;
 
@@ -155,8 +154,8 @@ namespace Contas.Services {
             colunaValorAnterior = coluna_valor;
             dados.Add(new List<object>() { "Save", "="+coluna_valor+linha_save });
             dados.Add(new List<object>() { "Total", "=SUM("+coluna_valor+linha_savings+":"+coluna_valor+limite_savings+")" });
-            
-            string range = "!"+coluna_nome+linha_savings+":"+coluna_valor+dados.Count+1;
+
+            string range = "!"+coluna_nome+linha_savings+":"+coluna_valor+linha_total_savings;
 
             ValueRange valueRange = new ValueRange();
             valueRange.Values = dados;

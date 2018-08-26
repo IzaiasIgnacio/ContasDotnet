@@ -33,14 +33,19 @@ namespace Contas.Repository {
                     parc = " "+i.ToString()+"/"+Parcelas.ToString();
                     data_movimentacao = data.AddMonths(i-1);
                 }
-                
+
+                var p = db.Movimentacao.Where(m =>
+                        m.Data.Month == data_movimentacao.Month &&
+                        m.Data.Year == data_movimentacao.Year).Max(m => m.Posicao);
+
                 db.Movimentacao.Add(new Movimentacao {
-                    Nome = nome+parc,
+                    Nome = nome + parc,
                     Data = data_movimentacao,
                     Tipo = tipo,
                     Valor = decimal.Parse(valor),
                     Status = status,
-                    IdCartao = id_cartao
+                    IdCartao = id_cartao,
+                    Posicao = p
                 });
             }
             db.SaveChanges();

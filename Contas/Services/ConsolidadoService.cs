@@ -27,11 +27,11 @@ namespace Contas.Services {
 
         public static decimal GetGastosCartao(int id) {
             MovimentacaoRepository mr = new MovimentacaoRepository();
-            return mr.Listar<Movimentacao>().Where(m => m.IdCartao == id).Sum(m => m.Valor);
+            return mr.Listar<Movimentacao>().Where(m => m.IdCartao == id && m.Status != "pago" && (m.Tipo == "gasto" || m.Tipo == "terceiros")).Sum(m => m.Valor);
         }
 
         public static Double GetValorMensal(DateTime data) {
-            Double consolidado_mensal = Double.Parse(GetValue("mensal"), CultureInfo.InvariantCulture);
+            Double consolidado_mensal = double.Parse(GetValue("mensal"), CultureInfo.InvariantCulture);
             int semanas_mes = NumeroSemanasMes(data.AddMonths(-1));
             int semana_atual = SemanaAtual();
             int mult = 0;
@@ -66,11 +66,11 @@ namespace Contas.Services {
                     sextas++;
                 }
             }
-            var proximoMes = mes.AddMonths(1);
+            /*var proximoMes = mes.AddMonths(1);
             int proximo = (int)proximoMes.DayOfWeek;
             if (proximo >= 4 || proximo == 0) {
                 sextas++;
-            }
+            }*/
             return sextas;
         }
 
