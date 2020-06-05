@@ -92,6 +92,8 @@ namespace Contas.Models.ViewModel {
                     return "<span class='dot digio_dot'></span>";
                 case 3:
                     return "<span class='dot inter_dot'></span>";
+                case 4:
+                    return "<span class='dot itau_dot'></span>";
             }
             return null;
         }

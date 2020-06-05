@@ -115,6 +115,10 @@
     background-color: orangered;
 }
 
+.itau_dot {
+    background-color: darkblue;
+}
+
 .slow-spin {
     -webkit-animation: fa-spin 3s infinite linear;
     animation: fa-spin 3s infinite linear;
